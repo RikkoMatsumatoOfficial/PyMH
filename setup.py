@@ -10,5 +10,4 @@ setup(
         '': ['x64\\*.dll'],
         '': ['x32\\*.dll'],
     }
-    description="This is My First Python Library For MinHook(Created by TsudaKageyo)... So Enjoy to use this my Python Library!!!"
 )
