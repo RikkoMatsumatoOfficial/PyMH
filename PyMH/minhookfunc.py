@@ -3,7 +3,7 @@ from enum import Enum
 import platform
 import os
 import sys
-import dllfound
+import PyMH.dllfound
 from ctypes import wintypes
 minhook_x32 = dllfound.DLLFound_MinhookX32()
 minhook_x64 = dllfound.DLLFound_MinhookX64()
