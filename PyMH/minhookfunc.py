@@ -48,11 +48,13 @@ class Hooks:
     def MH_Initialize():
         bits = platform.architecture()
         if(bits == "64bit"):
-            minhook_x64.MH_Initialize.argtypes = MH_Enum
-            return minhook_x64.MH_Initialize()
+            MH_Initialize = minhook_x64.MH_Initialize()
+            minhook_x64.MH_Initialize.argtypes = MH_Enum 
+            return MH_Initialize()
         elif(bits == "32bit"):
-            minhook_x32.MH_Initialize.argtypes = MH_Enum
-            return minhook_x32.MH_Initialize()
+            MH_Initialize = minhook_x32.MH_Initialize()
+            minhook_x32.MH_Initialize.argtypes = minhook_x32.MH_Initialize()
+            return MH_Initialize()
     @property
     def modname():
         return Hooks.modulename
