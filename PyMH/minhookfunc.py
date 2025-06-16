@@ -3,7 +3,7 @@ from enum import Enum
 import platform
 import os
 import sys
-import PyMH.dllfound
+import PyMH.dllfound as dllfound
 from ctypes import wintypes
 minhook_x32 = dllfound.DLLFound_MinhookX32()
 minhook_x64 = dllfound.DLLFound_MinhookX64()
@@ -82,35 +82,35 @@ class Hooks:
             MH_EnableHook.argtypes = (wintypes.LPVOID, wintypes.LPVOID, ctypes.POINTER(wintypes.LPVOID),)
             return MH_EnableHook(hook)
 
-    def MH_StatusToString(status : int):
-        bits = platform.architecture()
-        if(bits == "64bit"):
-            MH_StatusToString = minhook_x64.MH_StatusToString
-            MH_StatusToString.restype = ctypes.c_char_p
-            MH_StatusToString.argtypes = (ctypes.c_long,)
-            return MH_StatusToString(status)
-        elif(bits == "32bit"):
-            MH_StatusToString = minhook_x32.MH_StatusToString
-            MH_StatusToString.restype = ctypes.c_char_p
-            MH_StatusToString.argtypes = (ctypes.c_long,)
-            return MH_StatusToString(status)
+def MH_StatusToString(status : int):
+    bits = platform.architecture()
+    if(bits == "64bit"):
+        MH_StatusToString = minhook_x64.MH_StatusToString
+        MH_StatusToString.restype = ctypes.c_char_p
+        MH_StatusToString.argtypes = (ctypes.c_long,)
+        return MH_StatusToString(status)
+    elif(bits == "32bit"):
+        MH_StatusToString = minhook_x32.MH_StatusToString
+        MH_StatusToString.restype = ctypes.c_char_p
+        MH_StatusToString.argtypes = (ctypes.c_long,)
+        return MH_StatusToString(status)
 
-    def MH_DisableHook(hook_f):
-        bits = platform.architecture()
-        if(bits == "64bit"):
-            MH_DisableHook = minhook_x64.MH_DisableHook
-            MH_DisableHook.argtypes = (wintypes.LPVOID,)
-            return MH_DisableHook(hook_f)
-        elif(bits == "32bit"):
-            MH_DisableHook = minhook_x32.MH_DisableHook
-            MH_DisableHook.argtypes = (wintypes.LPVOID,)
-            return MH_DisableHook(hook_f)
+def MH_DisableHook(hook_f):
+    bits = platform.architecture()
+    if(bits == "64bit"):
+        MH_DisableHook = minhook_x64.MH_DisableHook
+        MH_DisableHook.argtypes = (wintypes.LPVOID,)
+        return MH_DisableHook(hook_f)
+    elif(bits == "32bit"):
+        MH_DisableHook = minhook_x32.MH_DisableHook
+        MH_DisableHook.argtypes = (wintypes.LPVOID,)
+        return MH_DisableHook(hook_f)
 
-    def MH_Unitialize():
-        bits = platform.architecture()
-        if(bits == "64bit"):
-            MH_Uninitialize = minhook_x64.MH_Uninitialize
-            return MH_Uninitialize()
-        elif(bits == "32bit"):
-            MH_Uninitialize = minhook_x32.MH_Uninitialize
-            return MH_Uninitialize()
+def MH_Unitialize():
+    bits = platform.architecture()
+    if(bits == "64bit"):
+        MH_Uninitialize = minhook_x64.MH_Uninitialize
+        return MH_Uninitialize()
+    elif(bits == "32bit"):
+        MH_Uninitialize = minhook_x32.MH_Uninitialize
+        return MH_Uninitialize()
