@@ -6,7 +6,7 @@ GetModuleHandleW.argtypes = (wintypes.LPCWSTR,)
 
 GetProcAddress = ctypes.windll.kernel32.GetProcAddress
 GetProcAddress.restype = ctypes.c_void_p
-GetProcAddress.argtypes = (wintypes.LPVOID, wintypes.LPCSTR)
+GetProcAddress.argtypes = (wintypes.LPVOID, wintypes.LPCSTR,)
 
 def GetModuleHandle(modulename):
     return GetModuleHandleW(modulename)
